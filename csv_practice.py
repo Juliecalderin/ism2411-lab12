@@ -91,3 +91,9 @@ with open("data/sales.csv", newline="") as f:
         summary[name] = summary.get(name, 0) + float(row["price"]) * int(row["quantity"])
 for name in sorted(summary):
     print(f"{name}: ${summary[name]:.2f}")
+
+# Exercise 8: append a log line each run
+print("\nExercise 8: append log")
+with open("data/run_log.txt", "a") as log:
+    log.write(f"{datetime.now():%Y-%m-%d %H:%M:%S} - total revenue: ${total_revenue:.2f}\n")
+print("Logged this run to data/run_log.txt")
