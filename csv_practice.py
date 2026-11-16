@@ -80,3 +80,14 @@ with open("data/sales.csv", newline="") as f:
     for row in reader:
         dict_total += float(row["price"]) * int(row["quantity"])
 print(f"Total revenue (DictReader): ${dict_total:.2f}")
+
+# Exercise 7: sales summary by product
+print("\nExercise 7: summary by product")
+summary = {}
+with open("data/sales.csv", newline="") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        name = row["product"]
+        summary[name] = summary.get(name, 0) + float(row["price"]) * int(row["quantity"])
+for name in sorted(summary):
+    print(f"{name}: ${summary[name]:.2f}")
