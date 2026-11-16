@@ -18,3 +18,10 @@ from datetime import datetime
 # Exercise 1: confirm the file opens
 with open("data/sales.csv", newline="") as f:
     print("Exercise 1: sales.csv opened OK")
+
+# Exercise 2: read and print raw rows (all values are strings)
+print("\nExercise 2: raw rows")
+with open("data/sales.csv", newline="") as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)
