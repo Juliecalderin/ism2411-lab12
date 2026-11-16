@@ -34,3 +34,18 @@ with open("data/sales.csv", newline="") as f:
     print("Header:", header)
     for row in reader:
         print(row)
+
+# Exercise 4: compute totals
+print("\nExercise 4: totals")
+total_revenue = 0
+with open("data/sales.csv", newline="") as f:
+    reader = csv.reader(f)
+    next(reader)
+    for row in reader:
+        product = row[0]
+        price = float(row[1])
+        qty = int(row[2])
+        total = price * qty
+        total_revenue += total
+        print(f"{product}: {qty} units × ${price:.2f} = ${total:.2f}")
+print(f"Total revenue: ${total_revenue:.2f}")
