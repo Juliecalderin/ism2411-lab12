@@ -49,3 +49,34 @@ with open("data/sales.csv", newline="") as f:
         total_revenue += total
         print(f"{product}: {qty} units × ${price:.2f} = ${total:.2f}")
 print(f"Total revenue: ${total_revenue:.2f}")
+
+# Exercise 5: filter orders over $100 and write cleaned.csv
+print("\nExercise 5: filter and write")
+original_count = 0
+written_count = 0
+with open("data/sales.csv", newline="") as infile, open("data/cleaned.csv", "w", newline="") as outfile:
+    reader = csv.reader(infile)
+    writer = csv.writer(outfile)
+    next(reader)
+    writer.writerow(["Product", "Price", "Qty", "Total"])
+    for row in reader:
+        original_count += 1
+        price = float(row[1])
+        qty = int(row[2])
+        total = price * qty
+        if total > 100:
+            writer.writerow([row[0], price, qty, round(total, 2)])
+            written_count += 1
+print(f"Rows in original: {original_count}")
+print(f"Rows written to cleaned.csv: {written_count}")
+
+# Exercise 6: csv.DictReader
+# reader uses index numbers (row[1]) so it is short and fine for simple files.
+# DictReader uses column names (row["price"]) so it is easier to read and safer if columns move.
+print("\nExercise 6: DictReader")
+dict_total = 0
+with open("data/sales.csv", newline="") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        dict_total += float(row["price"]) * int(row["quantity"])
+print(f"Total revenue (DictReader): ${dict_total:.2f}")
